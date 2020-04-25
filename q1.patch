@@ -1,0 +1,43 @@
+diff -Naur xv6-orig/create_file.c xv6_q1/create_file.c
+--- xv6-orig/create_file.c	1970-01-01 05:30:00.000000000 +0530
++++ xv6_q1/create_file.c	2019-11-08 21:12:01.479990000 +0530
+@@ -0,0 +1,18 @@
++#include "types.h"
++#include "stat.h"
++#include "user.h"
++#include "fcntl.h"
++
++int
++main(int argc, char *argv[])
++{
++
++	int fd = open("myfile.txt",O_CREATE | O_RDWR );
++	int i;
++	for(i=0;i<10000;++i){
++		write(fd,"Harshit",7);
++	}
++	write(fd, "\n", 1);
++	exit();
++
++}
+\ No newline at end of file
+diff -Naur xv6-orig/Makefile xv6_q1/Makefile
+--- xv6-orig/Makefile	2019-10-11 13:19:05.000000000 +0530
++++ xv6_q1/Makefile	2019-11-07 23:12:50.475979000 +0530
+@@ -181,6 +181,7 @@
+ 	_usertests\
+ 	_wc\
+ 	_zombie\
++	_create_file\
+ 
+ fs.img: mkfs README $(UPROGS)
+ 	./mkfs fs.img README $(UPROGS)
+@@ -250,7 +251,7 @@
+ EXTRA=\
+ 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
+ 	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
+-	printf.c umalloc.c\
++	printf.c umalloc.c create_file.c\
+ 	README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
+ 	.gdbinit.tmpl gdbutil\
+ 
